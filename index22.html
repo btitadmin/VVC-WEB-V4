@@ -526,7 +526,7 @@
         <a href="#" data-page="1">
          <li class="list-group-item1 " data-date="02" data-participants="50">
             <div class="menu-list1">
-              <span class="fs-6">ចុះឈ្មោះចូលរូមប្រជុំ</span>
+              <span class="fs-6">ចុះឈ្មោះមិនបានចូលរូមប្រជុំ</span>
               <div class="chevron-right">
               <i class="bi bi-chevron-right"></i>
                 </div>
@@ -536,7 +536,7 @@
         <a href="#" data-page="2">
          <li class="list-group-item1 " data-date="02" data-participants="50">
             <div class="menu-list1">
-              <span class="fs-6">បញ្ជីចុះឈ្មោះចូលរូមប្រជុំ</span>
+              <span class="fs-6">បញ្ជីឈ្មោះអ្នកមិនបានចូលរូមប្រជុំ</span>
               <div class="chevron-right">
               <i class="bi bi-chevron-right"></i>
                 </div>
@@ -593,6 +593,11 @@
                   <option value="ការប្រជុំបុគ្គលិកផ្នែកបើក CH1">ការប្រជុំបុគ្គលិកផ្នែកបើក CH1</option>
                 </select>
               </div>
+                  <div class="form-group">
+                <label for="email">មូលហេតុ</label>
+                <input type="text" id="email" name="មូលហេតុ"  required>
+                <span class="error-message" id="emailError"></span>
+            </div>
             <button type="submit" id="submit-button">ចុចឈ្មោះ</button>
         <div
         id="message"
@@ -618,7 +623,7 @@
 
 <div id="page-2" class="page">
     <div class="main-table justity-content-center container">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRvCxCZtNt0bKwaX6cqmUbJoLgeaUlwDRAQqd1ANKHdG3fmtCcRTfLB5UuJvf6owssax_8TbNmP38BB/pubhtml?widget=true&amp;headers=false"></iframe></div>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRD08kyF-LO5ectr0yihA7QxgG7nZyHn_HmIu__zeNTIxSgvPjuJyvAx0RL6Hf4b6BQ5eUuIJxVFQX0/pubhtml?widget=true&amp;headers=false"></iframe></div>
 </div>
 
 <div id="page-3" class="page">
@@ -645,7 +650,7 @@
 
       // Send a POST request to your Google Apps Script
       fetch(
-        "https://script.google.com/macros/s/AKfycbxfbXf1NmdI7uIV2Zmqmy2cpz0j-JFY3Cyq6r0dA4XM10iUWGLGtQ9s4gTJYVr2ybU8/exec",
+        "https://script.google.com/macros/s/AKfycbxEGuoYjdmx9Tn5L_JLGjlJB8U2w9ZgatXBqOTIfioU6rj-dc33wQ-VH_PG4NFlZnOj/exec",
         
         {
           redirect: "follow",
