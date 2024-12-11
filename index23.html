@@ -32,11 +32,6 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
     }
 
-    .meeting-card img {
-      max-width: 100%;
-      border-radius: 10px;
-      height: auto;
-    }
     .audio-player {
       max-width: 500px;
       width: 100%;
@@ -252,10 +247,11 @@
     }
     .main-header{
       position: relative;
-      top: 7.9rem;
+      top: 5rem;
     }
     .list-group-item {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+      border-radius: 5px;
       transition: box-shadow 0.3s ease-in-out; /* Smooth transition on hover */
     }
 
@@ -267,9 +263,6 @@
     .filter-input {
       margin-bottom: 20px;
     }
-    body{
-        font-family: Kh Battambang;
-    }
     .meeting-card {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
       border-radius: 10px;
@@ -279,12 +272,6 @@
 
     .meeting-card:hover {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-    }
-
-    .meeting-card img {
-      max-width: 100%;
-      border-radius: 10px;
-      height: auto;
     }
     .swiper {
       width: 90%;
@@ -513,6 +500,40 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.253);
             font-family: 'Times New Roman', Times, serif;
         }
+        .rounded-circle{
+            width: 100px;
+            height: 100px;
+        }
+        #employee1Modal{
+        background-image: url(https://i.ibb.co/q1B2H1z/page-0001.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        
+    }
+    #employee2Modal{
+        background-image: url(https://i.ibb.co/n8LLcs0/page-0002.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        
+    }
+    #employee3Modal{
+        background-image: url(https://i.ibb.co/tqBhYrY/page-0003.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        
+    }
+    .f-font{
+        font-family: 'Times New Roman', Times, serif;
+    }
     </style>
 </head>
 <body>
@@ -523,12 +544,11 @@
     <a href="index21.html"><button id="logout"><i class="fa-solid fa-right-from-bracket"></i></button></a>
   </div>
 </nav>
-<div class="main-header mt-6">
+<div class="main-header mt-4">
 <!--  main-page -->
 <div id="main" class="main-page container">
   <ul class="list-group" id="meetingList">
       
-        <a href="#" data-page="1">
             <div class="container mt-5 main-font">
         <h1 class="text-center mb-4">Employee List</h1>
         <div class="list-group list-group-flush">
@@ -545,7 +565,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(1)">View Profile</button>
+                    <a href="#" data-page="1"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(1)">View Profile</button></a>
                 </div>
             </div>
             <!-- Employee 2 -->
@@ -561,7 +581,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="2"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-3">
@@ -576,7 +596,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="3"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-4">
@@ -591,11 +611,11 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="4"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-5">
-                <img src="https://i.ibb.co/VWVMyDC/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="60">
+                <img src="https://i.ibb.co/VWVMyDC/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
                 <div>
                     <h5 class="mb-1">Vann Saret</h5>
                     <p class="mb-0 text-muted">Stock Manager</p>
@@ -606,7 +626,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="5"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-6">
@@ -621,7 +641,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="6"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-7">
@@ -636,7 +656,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="7"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-8">
@@ -651,7 +671,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="8"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
             <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-9">
@@ -666,7 +686,7 @@
                         <i class="fas fa-star text-muted" data-value="4"></i>
                         <i class="fas fa-star text-muted" data-value="5"></i>
                     </div>
-                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                    <a href="#" data-page="9"><button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button></a>
                 </div>
             </div>
         </div>
@@ -677,74 +697,91 @@
 </div>
     
 <!--   page 1   -->
-<div id="page-1" class="page">
+<div id="page-5" class="page">
+    <div class="container mt-5 f-font">
+        <!-- Text Section -->
+        <div class="text-center mb-4">
+            <h1>Job description</h1>
+            <span class="lead fs-6">Read about your job description.</span>
+        </div>
+
+        <!-- Employee Images -->
+        <div class="row text-center">
+            <!-- Employee 1 -->
+            <div class="col-6 col-md-4 col-sm-6 mb-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#employee1Modal">
+                    <img src="https://i.ibb.co/q1B2H1z/page-0001.jpg" class="card-img-top" alt="Employee 1">
+                </div>
+            </div>
+            <!-- Employee 2 -->
+            <div class="col-6 col-md-4 col-sm-6 mb-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#employee2Modal">
+                    <img src="https://i.ibb.co/n8LLcs0/page-0002.jpg" class="card-img-top" alt="Employee 2">
+    
+                </div>
+            </div>
+            <!-- Employee 3 -->
+            <div class="col-6 col-md-4 col-sm-6 mb-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#employee3Modal">
+                    <img src="https://i.ibb.co/tqBhYrY/page-0003.jpg" class="card-img-top" alt="Employee 3">
+                </div>
+            </div>
+            <!-- Employee 4 -->
+        </div>
+    </div>
+
+    <!-- Employee 1 Modal -->
+    <div class="modal fade" id="employee1Modal" tabindex="-1" aria-labelledby="employee1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+
+    <!-- Employee 2 Modal -->
+    <div class="modal fade" id="employee2Modal" tabindex="-1" aria-labelledby="employee2ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+
+    <!-- Employee 3 Modal -->
+    <div class="modal fade" id="employee3Modal" tabindex="-1" aria-labelledby="employee3ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+        </div>
+    </div>
+
+    <!-- Employee 4 Modal -->
+    <div class="modal fade" id="employee4Modal" tabindex="-1" aria-labelledby="employee4ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+    </div>
+<div id="page-2" class="page">
+    Hello!
+    </div>
+<div id="page-3" class="page">
+    Hello
+    </div>
+<div id="page-4" class="page">
+    Hello10
+    </div>
+<div id="page-5" class="page">
+    Hello23
+    </div>
+<div id="page-6" class="page">
+    Hello00
+    </div>
+<div id="page-7" class="page">
+    Hello55
+    </div>
+<div id="page-8" class="page">
+    Hello88
+    </div>
+<div id="page-9" class="page">
+    Hello99
     </div>
 </div>
 
-<div id="page-2" class="page">
-    <div class="main-table justity-content-center container">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRD08kyF-LO5ectr0yihA7QxgG7nZyHn_HmIu__zeNTIxSgvPjuJyvAx0RL6Hf4b6BQ5eUuIJxVFQX0/pubhtml?widget=true&amp;headers=false"></iframe></div>
-</div>
 <script>
-    document.getElementById("form").addEventListener("submit", function (e) {
-      e.preventDefault(); // Prevent the default form submission
-      document.getElementById("message").textContent = "កំពុងបញ្ជូន";
-      document.getElementById("message").style.display = "block";
-      document.getElementById("submit-button").disabled = true;
-
-      // Collect the form data
-      var formData = new FormData(this);
-      var keyValuePairs = [];
-      for (var pair of formData.entries()) {
-        keyValuePairs.push(pair[0] + "=" + pair[1]);
-      }
-
-      var formDataString = keyValuePairs.join("&");
-
-      // Send a POST request to your Google Apps Script
-      fetch(
-        "https://script.google.com/macros/s/AKfycbxEGuoYjdmx9Tn5L_JLGjlJB8U2w9ZgatXBqOTIfioU6rj-dc33wQ-VH_PG4NFlZnOj/exec",
-        
-        {
-          redirect: "follow",
-          method: "POST",
-          body: formDataString,
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-        }
-      )
-        .then(function (response) {
-          // Check if the request was successful
-          if (response) {
-            return response; // Assuming your script returns JSON response
-          } else {
-            throw new Error("Failed to submit the form.");
-          }
-        })
-        .then(function (data) {
-          // Display a success message
-          document.getElementById("message").textContent =
-            "បានបញ្ជូនរួចរាល់";
-          document.getElementById("message").style.display = "block";
-          document.getElementById("message").style.backgroundColor = "green";
-          document.getElementById("message").style.color = "beige";
-          document.getElementById("submit-button").disabled = false;
-          document.getElementById("form").reset();
-
-          setTimeout(function () {
-            document.getElementById("message").textContent = "";
-            document.getElementById("message").style.display = "none";
-          }, 2600);
-        })
-        .catch(function (error) {
-          // Handle errors, you can display an error message here
-          console.error(error);
-          document.getElementById("message").textContent =
-            "An error occurred while submitting the form.";
-          document.getElementById("message").style.display = "block";
-        });
-    });
     // Function to show a specific page and hide the main page
     function showPage(pageId) {
         document.getElementById('main').style.display = 'none'; // Hide main page
