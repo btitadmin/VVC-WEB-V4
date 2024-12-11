@@ -181,6 +181,19 @@
       position: relative;
       top: 9rem;
     }
+            .page {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
   </style>
 </head>
 <body>
@@ -265,14 +278,164 @@
           <a href="index20.html">ចុះឈ្មោះចូលរួមប្រជុំ</a>
         </div>
       </div>
+      <div id="main" class="main-page container">
+        <a href="#" data-page="1">
       <div class="col-6">
         <div class="menu-card bg-success shadow p-2 mb-2">
           <a href=""><i class="bi bi-file-earmark-person"></i></a>
           <a href="">ព័ត៌មានបុគ្គលិក</a>
         </div>
+      </div></a>
       </div>
     </div>
   </div>
+</div>
+  <div id="page-1" class="page">
+    <div class="container mt-5 main-font">
+        <h1 class="text-center mb-4">Employee List</h1>
+        <div class="list-group list-group-flush">
+            <!-- Employee 1 -->
+            <div class="list-group-item d-flex align-items-center gap-3" id="employee-1">
+                <img src="https://i.ibb.co/JRZLsz2/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Oeun SamAnn</h5>
+                    <p class="mb-0 text-muted">Owner</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(1)">View Profile</button>
+                </div>
+            </div>
+            <!-- Employee 2 -->
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-2">
+                <img src="https://i.ibb.co/WKBTc21/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Teav Sovann</h5>
+                    <p class="mb-0 text-muted">Owner</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-3">
+                <img src="https://i.ibb.co/0jftMy7/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Vong Sovanda</h5>
+                    <p class="mb-0 text-muted">GM</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-4">
+                <img src="https://i.ibb.co/yd2tk5K/image.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Phal SeangLeng</h5>
+                    <p class="mb-0 text-muted">HR</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-5">
+                <img src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2Fnv9KctqopDPka7RTcw4l%2Fpub%2FxcchgUtwP3UuAKriqHoI.png" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Vann Saret</h5>
+                    <p class="mb-0 text-muted">Stock Manager</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-6">
+                <img src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2Fnv9KctqopDPka7RTcw4l%2Fpub%2FUGj6yJYqdsQ40ipUKPR7.jpg" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Yi RaChhet</h5>
+                    <p class="mb-0 text-muted">General Manager</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-7">
+                <img src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2Fnv9KctqopDPka7RTcw4l%2Fpub%2FygwkXCmsawL2zEfhHC0L.jpeg" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Doem Socheat</h5>
+                    <p class="mb-0 text-muted">IT Manager</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-8">
+                <img src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/nv9KctqopDPka7RTcw4l/pub/QfBE2xEmDisDl6obAEOp.jpg" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Sao SamBath</h5>
+                    <p class="mb-0 text-muted">IT Support</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+            <div class="list-group-item  d-flex align-items-center mt-3 gap-3" id="employee-9">
+                <img src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2Fnv9KctqopDPka7RTcw4l%2Fpub%2FY33WPaleaY82GeyTGrQd.JPG" class="rounded-circle me-3" alt="Employee Photo" width="80" height="80">
+                <div>
+                    <h5 class="mb-1">Seth Raksmey</h5>
+                    <p class="mb-0 text-muted">Warehouse Manager</p>
+                    <div class="star-rating mt-1" data-rating="0">
+                        <i class="fas fa-star text-muted" data-value="1"></i>
+                        <i class="fas fa-star text-muted" data-value="2"></i>
+                        <i class="fas fa-star text-muted" data-value="3"></i>
+                        <i class="fas fa-star text-muted" data-value="4"></i>
+                        <i class="fas fa-star text-muted" data-value="5"></i>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="viewProfile(2)">View Profile</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </d
 </div>
   <div class="bottom-menu">
     <a href="#"><i class="fa-solid fa-house"></i></a>
@@ -349,6 +512,26 @@ ScrollReveal().reveal(".f-boks", {
       }, 9000); // 5 seconds
     }, 100); // 3 seconds
   });
+     function showPage(pageId) {
+        document.getElementById('main').style.display = 'none'; // Hide main page
+        document.getElementById('page-' + pageId).style.display = 'block'; // Show the selected page
+    }
+
+    // Function to go back to the main page
+    function goBack() {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.style.display = 'none'); // Hide all pages
+        document.getElementById('main').style.display = 'block'; // Show the main page
+    }
+
+    // Add event listeners to page links
+    document.querySelectorAll('.main-page a').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            const pageId = this.getAttribute('data-page'); // Get the page ID
+            showPage(pageId); // Show the selected page
+        });
+    });
   </script>
 </body>
 </html>
