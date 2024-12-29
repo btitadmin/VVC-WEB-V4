@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style1.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="/node_modules/bootstrap-icons/icons/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -257,6 +258,7 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .menu-list1:hover {
@@ -273,6 +275,7 @@
         .menu-list1 span {
             font-size: 1.1rem;
             font-weight: bold;
+            text-decoration: none;
             color: #333;
             flex-grow: 1;
             margin-left: 15px;
@@ -583,6 +586,16 @@
             position: relative;
             top: 5rem;
         }
+        .list-group a{
+            text-decoration: none;
+        }
+        #searchInput {
+            color: blue;
+        }
+        input::placeholder{
+            color: gray;
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -598,23 +611,26 @@
     <div class="main-header mt-6">
         <div class="container mt-3 main-list-meeting">
             <div class="mb-3 sort" id="sort">
-                <label for="sortBy" class="form-label">Sort By</label>
+                <label for="sortBy" class="form-label">Sort By <small class="text-red">*</small></label>
                 <select class="form-select" id="sortBy" onchange="sortMeetings()">
                     <option value="date-asc">A-Z</option>
                     <option value="date-desc">Z-A</option>
                 </select>
             </div>
+            <div id="main-search">
+            <h1 class="mb-4">ស្វែងរកការប្រជុំ <small class="text-red">*</small></h1>
+            <input type="text" id="searchInput" class="form-control mb-3" placeholder="ស្វែងរកការប្រជុំ..."></div>
             <div id="main" class="main-page">
-                <ul class="list-group" id="meetingList">
+                <ul class="list-group" id="itemList">
                     <a href="#" data-page="1">
-                        <li class="list-group-item1 " data-date="01" data-participants="50">
+                        <li class="list-group-item1 ani-1 " id="meetingList" data-date="01" data-participants="50">
                             <div class="menu-list1">
                                 <span class="fs-6" style="color: gold; font-weight: bold; font-family: Kh Muol;">01 - ការប្រជុំប្រចាំសប្តាហ៍ហាងទំនិញ ៣១៨<br>
                                     <p class="mt-2 txt-date" style="font-family: none;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ៤កើត
                                         ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨
                                         ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង
-                                        ថ្ងៃទី៤ ខែធ្នូ ឆ្នាំ២០២៤ ”</p>
+                                        ថ្ងៃទី 04 ខែធ្នូ ឆ្នាំ2024 ”</p>
                                 </span>
                                 <div class="chevron-right">
                                     <i class="bi bi-chevron-right"></i>
@@ -623,12 +639,12 @@
                         </li>
                     </a>
                     <a href="#" data-page="2">
-                        <li class="list-group-item1 " data-date="02" data-participants="50">
+                        <li class="list-group-item1 ani-2 " id="meetingList" data-date="02" data-participants="50">
                             <div class="menu-list1">
                                 <span class="fs-6" style="color: gold; font-weight: bold; font-family: Kh Muol;">02 - ការប្រជុំប្រចាំសប្តាហ៍ហាងទំនិញ ៣១៨<br>
                                     <p class="mt-2 txt-date" style="font-family: none;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ១០រោច ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨
-                                        ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី២៥ ខែធ្នូ ឆ្នាំ២០២៤៤ ”</p>
+                                        ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី 25 ខែធ្នូ ឆ្នាំ2024 ”</p>
                                 </span>
                                 <div class="chevron-right">
                                     <i class="bi bi-chevron-right"></i>
@@ -700,6 +716,7 @@
         function showPage(pageId) {
             document.getElementById('main').style.display = 'none'; // Hide main page
             document.getElementById('sort').style.display = 'none'; // Hide main page
+            document.getElementById('main-search').style.display = 'none'; // Hide main page
             document.getElementById('page-' + pageId).style.display = 'block'; // Show the selected page
         }
 
@@ -719,7 +736,7 @@
             });
         });
         function sortMeetings() {
-            const meetingList = document.getElementById('meetingList');
+            const meetingList = document.getElementById('itemList');
             const meetings = Array.from(meetingList.getElementsByClassName('list-group-item1'));
             const sortBy = document.getElementById('sortBy').value;
 
@@ -738,6 +755,44 @@
             meetingList.innerHTML = '';
             meetings.forEach(meeting => meetingList.appendChild(meeting));
         }
+            document.getElementById('searchInput').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('#itemList .list-group-item1');
+      
+            items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }); 
+    const scrollRevealOption = {
+    origin: "bottom",
+    distance: "10px",
+    duration: 1000,
+};
+
+    ScrollReveal().reveal(".ani-1", {
+    ...scrollRevealOption,
+    origin: "bottom",
+    distance:"100px"
+});
+    ScrollReveal().reveal(".ani-2", {
+    ...scrollRevealOption,
+    origin: "bottom",
+    delay: 400,
+    distance:"100px"
+});
+    ScrollReveal().reveal(".itemList", {
+    ...scrollRevealOption,
+    delay: 400,
+});
+    ScrollReveal().reveal("#form", {
+    ...scrollRevealOption,
+    delay: 500,
+});
+    ScrollReveal().reveal(".f-boks", {
+     ...scrollRevealOption,
+    delay: 700,
+});
     </script>
 
 </body>
