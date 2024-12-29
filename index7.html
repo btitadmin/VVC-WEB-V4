@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style1.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="stylesheet" href="/node_modules/bootstrap-icons/icons/">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
@@ -162,7 +163,7 @@
       <div class="row g-4 mt-3 ">
   
         <!-- Cart 1 -->
-        <div class="col-12 col-md-6 col-lg-4 text-h5">
+        <div class="col-12 col-md-6 col-lg-4 text-h5 ani-1">
           <a href="index10.html"><div class="cart-box">
             <img src="https://i.ibb.co/9YnQQ1m/image.png" alt="Cart Item 1" class="cart-image">
             <h5 class="cart-title">ការប្រជុំប្រចាំខែ</h5>
@@ -170,7 +171,7 @@
             <button class="btn btn-primary mt-3">ចូលស្តាប់ការប្រជុំ</button>
           </div></a>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 text-h5">
+        <div class="col-12 col-md-6 col-lg-4 text-h5 ani-2">
           <a href="index8.html"><div class="cart-box">
             <img src="https://i.ibb.co/ByD1dTn/image.png" alt="Cart Item 1" class="cart-image">
             <h5 class="cart-title">ការផ្នែកស្តុកទំនិញ ៣១៨</h5>
@@ -178,7 +179,7 @@
             <button class="btn btn-primary mt-3">ចូលស្តាប់ការប្រជុំ</button>
           </div></a>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 text-h5">
+        <div class="col-12 col-md-6 col-lg-4 text-h5 ani-3">
           <a href="index9.html"><div class="cart-box">
             <img src="https://i.ibb.co/WzdmLhT/image.png" alt="Cart Item 1" class="cart-image">
             <h5 class="cart-title">ការប្រជុំផ្នែកស្តុកទំនិញ CH1</h5>
@@ -186,7 +187,7 @@
             <button class="btn btn-primary mt-3">ចូលស្តាប់ការប្រជុំ</button>
           </div></a>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 text-h5">
+        <div class="col-12 col-md-6 col-lg-4 text-h5 ani-4">
           <a href="index11.html"><div class="cart-box">
             <img src="https://i.ibb.co/WFYVFcM/image.png" alt="Cart Item 1" class="cart-image">
             <h5 class="cart-title">ការប្រជុំបុគ្គលិកកម្មករ CH1</h5>
@@ -194,7 +195,7 @@
             <button class="btn btn-primary mt-3">ចូលស្តាប់ការប្រជុំ</button>
           </div></a>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 text-h5">
+        <div class="col-12 col-md-6 col-lg-4 text-h5 ani-5">
           <a href="index12.html"><div class="cart-box">
             <img src="https://i.ibb.co/tChc8Lc/image.png" alt="Cart Item 1" class="cart-image">
             <h5 class="cart-title">ការប្រជុំបុគ្កលិកកម្មករ​ CKD</h5>
@@ -215,21 +216,30 @@
   duration: 1000,
 };
 
-ScrollReveal().reveal(".navbar", {
+ScrollReveal().reveal(".ani-1", {
   ...scrollRevealOption,
   origin: "bottom",
+  distance:"200px",
 });
-ScrollReveal().reveal(".daily-report", {
+ScrollReveal().reveal(".ani-2", {
+  ...scrollRevealOption,
+  delay: 100,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-3", {
+  ...scrollRevealOption,
+  delay: 200,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-4", {
+  ...scrollRevealOption,
+  delay: 300,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-5", {
   ...scrollRevealOption,
   delay: 400,
-});
-ScrollReveal().reveal("#form", {
-  ...scrollRevealOption,
-  delay: 500,
-});
-ScrollReveal().reveal(".f-boks", {
-  ...scrollRevealOption,
-  delay: 700,
+  distance:"200px",
 });
 const textareas = document.querySelectorAll('textarea');
 
