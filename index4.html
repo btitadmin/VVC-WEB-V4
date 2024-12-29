@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style1.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
   <link rel="stylesheet" href="/node_modules/bootstrap-icons/icons/">
+  <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     *{
@@ -242,7 +243,7 @@
     </div> -->
   </section>
   <form id="form" class="container pl-4 main-form  text-white shadow p-2 mb-2" method="POST">
-      <div class="field">
+      <div class="field ani-1">
           <label class="label">Email</label>
           <div class="control">
             <input
@@ -253,7 +254,7 @@
             />
           </div>
         </div>
-    <div class="field">
+    <div class="field ani-2">
       <label class="label">ឈ្មោះ</label>
       <div class="control">
         <input
@@ -264,7 +265,7 @@
         />
       </div>
     </div>
-    <div class="field">
+    <div class="field ani-3">
       <label class="label">បុគ្គលិកផ្នែក</label>
       <div class="control">
           <select class="label mt-0 drop" name="មុខតំណែង" id="Positions" name="Position" required>
@@ -289,7 +290,7 @@
           </select>
       </div>
     </div>
-    <div class="field">
+    <div class="field ani-4">
       <label class="label">ថ្ងៃខែឆ្នាំ</label>
       <div class="control">
         <input
@@ -300,14 +301,14 @@
         />
       </div>
     </div>
-    <div class="field">
+    <div class="field ani-5">
       <div class="control main-font">
       <label class="label main-font">របាយការពេលល្ងាច</label>
         <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" placeholder="សរសេររបាយការណ៍របស់អ្នក" name="Content"></textarea>
       </div>
       </div>
     <div class="field is-grouped">
-      <div class="control">
+      <div class="control ani-6">
         <button class="button bg-primary btn" type="submit" id="submit-button">
           បញ្ជូន
       </div>
@@ -403,21 +404,35 @@
   duration: 1000,
 };
 
-ScrollReveal().reveal(".navbar", {
+ScrollReveal().reveal(".ani-1", {
   ...scrollRevealOption,
   origin: "bottom",
+  distance:"200px",
 });
-ScrollReveal().reveal(".daily-report", {
+ScrollReveal().reveal(".ani-2", {
+  ...scrollRevealOption,
+  delay: 100,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-3", {
+  ...scrollRevealOption,
+  delay: 200,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-4", {
+  ...scrollRevealOption,
+  delay: 300,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-5", {
   ...scrollRevealOption,
   delay: 400,
+  distance:"200px",
 });
-ScrollReveal().reveal("#form", {
+ScrollReveal().reveal(".ani-6", {
   ...scrollRevealOption,
   delay: 500,
-});
-ScrollReveal().reveal(".f-boks", {
-  ...scrollRevealOption,
-  delay: 700,
+  distance:"200px",
 });
 const textareas = document.querySelectorAll('textarea');
 
