@@ -193,8 +193,7 @@
     .modal-title{
       font-family: Khmer OS Battambang;
     }
-     /* Full screen overlay */
-    .full-screen-alert {
+.full-screen-alert {
       position: fixed;
       top: 0;
       left: 0;
@@ -212,7 +211,26 @@
       opacity: 0; /* Initially hidden for fade-in animation */
       animation: fadeIn 1s forwards; /* Fade-in effect */
     }
-
+    @media (max-width:768px) {
+      .full-screen-alert2 {
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: none;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      align-items: center;
+      z-index: -10;
+      opacity: 0; /* Initially hidden for fade-in animation */
+      animation: fadeIn 1s forwards; /* Fade-in effect */
+    }
+      
+    }
     /* Image styling */
     .full-screen-alert img {
       max-width: 100%;
@@ -371,6 +389,7 @@
   <img src="https://i.ibb.co/pKykscD/happy-new-year-2025.jpg" alt="Full Screen Image" width="600px"></div>
   <div class="input-container">
   </div>
+  <div class="full-screen-alert2"><img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd25ud3poMWVsMXRsMXI5dHBqMGlhbnYxcHY1ZHVjb3VxcjJ3bW9vciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/peAFQfg7Ol6IE/giphy.webp" alt=""></div>
 </div>
 <!--   pop up  -->
 <!--   <div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
