@@ -539,7 +539,7 @@
 </nav>
 <div class="main-header mt-6">
   <div class="container mt-3 main-list-meeting">
-  <div class="main-sort">
+  <div class="main-sort" id="sort">
     <label for="sortBy" class="form-label">Sort By</label>
     <select class="form-select" id="sortBy" onchange="sortMeetings()">
       <option value="date-asc">A-Z</option>
@@ -652,6 +652,8 @@
     // Function to show a specific page and hide the main page
     function showPage(pageId) {
         document.getElementById('main').style.display = 'none'; // Hide main page
+        document.getElementById('sort').style.display = 'none'; // Hide sort page
+        document.getElementById('main-search').style.display = 'none'; // Hide main-search page
         document.getElementById('page-' + pageId).style.display = 'block'; // Show the selected page
     }
 
