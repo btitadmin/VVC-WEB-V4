@@ -235,6 +235,7 @@
       </div>
       <div class="swiper-slide" style="background-image: url('https://i.ibb.co/j5D6MfT/photo-2024-09-28-10-38-55.jpg');">
       </div>
+      </div>
     </div>
     <!-- Swiper Pagination -->
     <div class="swiper-pagination"></div>
@@ -275,9 +276,15 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="menu-card bg-success shadow p-2 mb-2 ani-5">
+        <div class="menu-card bg-warning shadow p-2 mb-2 ani-5">
           <a href="index23.html"><i class="bi bi-file-earmark-person"></i></a>
           <a href="index23.html">ព័ត៌មានបុគ្គលិក</a>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="menu-card bg-info shadow p-2 mb-2 ani-6">
+          <a href="index23.html"><i class="fa-solid fa-print"></i></a>
+          <a href="index23.html">ឯកសារសម្រាប់ Print</a>
         </div>
       </div>
       </div>
@@ -354,6 +361,11 @@ ScrollReveal().reveal(".ani-4", {
 ScrollReveal().reveal(".ani-5", {
   ...scrollRevealOption,
   delay: 400,
+  distance:"200px",
+});
+ScrollReveal().reveal(".ani-6", {
+  ...scrollRevealOption,
+  delay: 500,
   distance:"200px",
 });
       document.addEventListener("DOMContentLoaded", function () {
