@@ -193,11 +193,187 @@
     .modal-title{
       font-family: Khmer OS Battambang;
     }
+     /* Full screen overlay */
+    .full-screen-alert {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      background-image: url(https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd25ud3poMWVsMXRsMXI5dHBqMGlhbnYxcHY1ZHVjb3VxcjJ3bW9vciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/peAFQfg7Ol6IE/giphy.webp);
+      display: flex;
+      justify-content: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      opacity: 0; /* Initially hidden for fade-in animation */
+      animation: fadeIn 1s forwards; /* Fade-in effect */
+    }
+
+    /* Image styling */
+    .full-screen-alert img {
+      max-width: 100%;
+      max-height: 60%; /* Let the image take up most of the screen */
+      object-fit: contain; /* Ensure the image fits within the screen */
+      margin-bottom: 20px; /* Space between image and text */
+    }
+
+    /* Alert text styling */
+    .alert-text {
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      max-width: 80%;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    /* Input field container styling */
+    .input-container {
+      position: relative;
+      margin-top: 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Stylish input field */
+    .input-field {
+      padding: 12px 20px;
+      font-size: 18px;
+      width: 70%;
+      max-width: 300px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      background-color: transparent;
+      color: #fff;
+      outline: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      margin-right: 10px; /* Space between input and button */
+    }
+
+    /* Focus effect */
+    .input-field:focus {
+      border-color: #00ff00; /* Green border on focus */
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+      background-color: rgba(0, 255, 0, 0.1);
+    }
+
+    /* Hover effect */
+    .input-field:hover {
+      border-color: #4CAF50;
+      background-color: rgba(0, 255, 0, 0.05);
+    }
+
+    /* Placeholder text style */
+    .input-field::placeholder {
+      color: #bbb;
+      font-style: italic;
+    }
+
+    /* Send button styling */
+    .send-btn {
+      padding: 12px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .send-btn:hover {
+      background-color: gold /* Darker green on hover */
+    }
+
+    /* Fireworks animation effect */
+    .fireworks {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      animation: fireworks 1s ease-out forwards;
+    }
+
+    .fireworks span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: spark 1s linear infinite;
+    }
+
+    @keyframes fireworks {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes spark {
+      0% {
+        transform: scale(0) translate(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1) translate(10px, 10px);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(0) translate(20px, -20px);
+        opacity: 0;
+      }
+    }
+    /* Close button styling */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      z-index: 999;
+      right: 20px;
+      border: none;
+      font-size: 20px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    /* Animation for fade-in effect */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .img{
+        position: absolute;
+        top: 1.6rem;
+    }
   </style>
 </head>
 <body>
+  <!-- Full-Screen Image Alert with Text, Input, and Send Button -->
+<div id="imageAlert" class="full-screen-alert">
+  <button class="close-btn" onclick="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
+  <div class="img">
+  <img src="https://i.ibb.co/pKykscD/happy-new-year-2025.jpg" alt="Full Screen Image" width="600px"></div>
+  <div class="input-container">
+  </div>
+</div>
 <!--   pop up  -->
-  <div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--   <div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -212,7 +388,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
   <!-- Navbar -->
   <div class="main-header">
   <nav class="navbar navbar-expand-lg navbar-custom shadow-lg mb-5">
@@ -401,6 +577,45 @@ ScrollReveal().reveal(".ani-6", {
             showPage(pageId); // Show the selected page
         });
     });
+    // Function to close the image alert
+  function closeAlert() {
+    document.getElementById("imageAlert").style.display = "none";
+  }
+
+  // Automatically show the image alert when the page loads
+  window.onload = function() {
+    setTimeout(function() {
+      document.getElementById("imageAlert").style.display = "flex";
+    }, 1000); // Show the image alert after 1 second
+  };
+
+  // Trigger fireworks animation when input is focused
+  function triggerFireworks() {
+    const fireworksContainer = document.getElementById('fireworksContainer');
+    fireworksContainer.innerHTML = ''; // Clear previous sparks
+
+    // Generate multiple sparks for the fireworks effect
+    for (let i = 0; i < 30; i++) {
+      const spark = document.createElement('span');
+      spark.style.left = `${Math.random() * 100}%`;
+      spark.style.top = `${Math.random() * 100}%`;
+      fireworksContainer.appendChild(spark);
+    }
+
+    fireworksContainer.style.animation = 'fireworks 1s ease-out forwards';
+  }
+
+  // Function to simulate sending the message
+  function sendMessage() {
+    const inputField = document.querySelector('.input-field');
+    const message = inputField.value.trim();
+    if (message) {
+      alert("Message Sent: " + message);  // You can replace this with actual sending logic
+      inputField.value = '';  // Clear the input field after sending
+    } else {
+      alert("Please enter a message before sending.");
+    }
+  }
   </script>
 </body>
 </html>
