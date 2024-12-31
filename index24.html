@@ -12,6 +12,10 @@
   <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=fact_check" />
   <link rel="stylesheet" href="/node_modules/bootstrap-icons/icons/">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     @media (max-width: 768px) {
@@ -163,21 +167,21 @@
       </select>
     </div> -->
   </div>
-  <div id="main" class="main-page">
-    <div class="container py-5 mt-6 main-content">
-      <h2 class="text-center mb-4 text-title">បញ្ជីតារាងស្នើរសុំផ្សេងៗ</h2>
-  
+  <div class="container py-5 mt-6 main-content">
+    <h2 class="text-center mb-4 text-title" id="text">បញ្ជីតារាងស្នើរសុំផ្សេងៗ</h2>
+    
       <!-- Box List -->
+      <div id="main" class="main-page">
       <div class="row g-4 mt-3  justify-content-center">
         <!-- Cart 1 -->
         <div class="col-12 col-md-6 col-lg-4 text-h5 ani-1">
-          <a href="index2.html"><div class="cart-box">
+          <a href="#" data-page="1"><div class="cart-box">
           <img src="https://cdn-icons-png.flaticon.com/512/2558/2558430.png" alt="" width="100px">
-            <h5 class="cart-title mt-6">សំណើរសុំផ្សេងៗ</h5>
+          <h5 class="cart-title mt-6">សំណើរសុំផ្សេងៗ</h5>
           </div></a>
         </div>
         <div class="col-12 col-md-6 col-lg-4 text-h5 ani-2">
-          <a href="#" data-page="1"><div class="cart-box">
+          <a href="#" data-page="2"><div class="cart-box">
             <img src="https://cdn-icons-png.flaticon.com/512/12477/12477062.png" alt="" width="100px">
             <h5 class="cart-title mt-6">បញ្ជីតារាងសំណើរស្នើរសុំផ្សេងៗ</h5>
           </div></a>
@@ -186,13 +190,345 @@
     </div>
     </div>
     <div id="page-1" class="page">
-      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTUytrU3yXhmeJ1OUyLOKd487Z5PvjjWQ8fpR8PlwPncffxHd_hdPEUvDK0AkKTFhiOhGnCLnBcReoc/pubhtml?widget=true&amp;headers=false" width="100%" height="500px" class="col-12"></iframe>
+      <form id="form" onsubmit=" return sender()" class=" pl-0 main-form-request font-change" method="POST">
+        <div class="container mt-3">
+            </div>
+            <div class="mt-6 f-boks card bg-white text-white shadow p-2 mb-2">
+              <div class="field">
+                <label class="label mt-4 text">ប្រភេទនៃការស្នើសុំ</label>
+                <div class="control">
+                  <select class="label mt-2 drop" name="ប្រភេទនៃការស្នើសុំ" id="typeofrequest" required>
+                    <option value="">សូមជ្រើសរើស</option>
+                    <option value="សម្រាកប្រចាំឆ្នាំ(Annual Leave)">សម្រាកប្រចាំឆ្នាំ(Annual Leave)</option>
+                    <option value="សម្រាកដោយជំងឺ(Sick Leave)">សម្រាកដោយជំងឺ(Sick Leave)</option>
+                    <option value="ភ្លេចស្កេនមេដៃ (Forgot​ FP )">ភ្លេចស្កេនមេដៃ (Forgot​ FP )</option>
+                    <option value="សម្រាកលំហែមាតុភាព(Maternity Leave)">សម្រាកលំហែមាតុភាព(Maternity Leave)</option>
+                    <option value="ថែមម៉ោង (OT)">ថែមម៉ោង (OT)</option>
+                    <option value="ចេញមុនម៉ោង (Early)">ចេញមុនម៉ោង (Early)</option>
+                    <option value="ប្តូរដេអូស (Changing day off)">ប្តូរដេអូស (Changing day off)</option>
+                    <option value="សម្រាកពិសេស (Special Leave)">សម្រាកពិសេស (Special Leave)</option>
+                    <option value="មកយឺត (Late)">មកយឺត (Late)</option>
+                  </select>
+                </div>
+              </div>
+              <!-- ឈ្មោះអ្នកសើ្នសុំ -->
+          <div class="field">
+            <label class="label mt-4 text">ឈ្មោះអ្នកសើ្នសុំ</label>
+            <div class="control">
+              <input
+                class="input drop"
+                type="text"
+                placeholder="ឈ្មោះរបស់អ្នក" name="ឈ្មោះអ្នកសើ្នសុំ" id="namerequest" required />
+            </div>
+          </div>
+          <!-- ចំនួនថ្ងៃ -->
+          <div class="field">
+            <label class="label mt-4 text">ចំនួនថ្ងៃ</label>
+            <select class="label mt-2 drop" name="ចំនួនថ្ងៃ" id="numberofdays">
+              <option value="" class="text-select">សូមជ្រើសរើស</option>
+              <option value="0.5 /ថ្ងៃ">0.5 /ថ្ងៃ</option>
+              <option value="1 /ថ្ងៃ">1 /ថ្ងៃ</option>
+              <option value="1.5 /ថ្ងៃ">1.5 /ថ្ងៃ</option>
+              <option value="2 /ថ្ងៃ">2 /ថ្ងៃ</option>
+              <option value="2.5 /ថ្ងៃ">2.5 /ថ្ងៃ</option>
+              <option value="3 /ថ្ងៃ">3 /ថ្ងៃ</option>
+              <option value="3.5 /ថ្ងៃ">3.5 /ថ្ងៃ</option>
+              <option value="4 /ថ្ងៃ">4 /ថ្ងៃ</option>
+              <option value="4.5 /ថ្ងៃ">4.5 /ថ្ងៃ</option>
+              <option value="5 /ថ្ងៃ">5 /ថ្ងៃ</option>
+              <option value="5.5 /ថ្ងៃ">5.5 /ថ្ងៃ</option>
+              <option value="6 /ថ្ងៃ">6 /ថ្ងៃ</option>
+              <option value="6.5 /ថ្ងៃ">6.5 /ថ្ងៃ</option>
+              <option value="7 /ថ្ងៃ">7 /ថ្ងៃ</option>
+              <option value="7.5 /ថ្ងៃ">7.5 /ថ្ងៃ</option>
+              <option value="8 /ថ្ងៃ">8 /ថ្ងៃ</option>
+              <option value="8.5 /ថ្ងៃ">8.5 /ថ្ងៃ</option>
+              <option value="9 /ថ្ងៃ">9 /ថ្ងៃ</option>
+            </select>
+          </div>
+          <!-- ចំនួនថ្ងៃនៅសល់ -->
+          <div class="field">
+            <label class=" label mt-4 text">ចំនួនថ្ងៃនៅសល់</label>
+            <select class="label mt-2 drop" name="ច្បាប់នៅសល់ " id="day">
+              <option value="">សូមជ្រើសរើស</option>
+              <option value="0.5 /ថ្ងៃ">0.5 /ថ្ងៃ</option>
+              <option value="1 /ថ្ងៃ">1 /ថ្ងៃ</option>
+              <option value="1.5 /ថ្ងៃ">1.5 /ថ្ងៃ</option>
+              <option value="2 /ថ្ងៃ">2 /ថ្ងៃ</option>
+              <option value="2.5 /ថ្ងៃ">2.5 /ថ្ងៃ</option>
+              <option value="3 /ថ្ងៃ">3 /ថ្ងៃ</option>
+              <option value="3.5 /ថ្ងៃ">3.5 /ថ្ងៃ</option>
+              <option value="4 /ថ្ងៃ">4 /ថ្ងៃ</option>
+              <option value="4.5 /ថ្ងៃ">4.5 /ថ្ងៃ</option>
+              <option value="5 /ថ្ងៃ">5 /ថ្ងៃ</option>
+              <option value="5.5 /ថ្ងៃ">5.5 /ថ្ងៃ</option>
+              <option value="6 /ថ្ងៃ">6 /ថ្ងៃ</option>
+              <option value="6.5 /ថ្ងៃ">6.5 /ថ្ងៃ</option>
+              <option value="7 /ថ្ងៃ">7 /ថ្ងៃ</option>
+              <option value="7.5 /ថ្ងៃ">7.5 /ថ្ងៃ</option>
+              <option value="8 /ថ្ងៃ">8 /ថ្ងៃ</option>
+              <option value="8.5 /ថ្ងៃ">8.5 /ថ្ងៃ</option>
+              <option value="9 /ថ្ងៃ">9 /ថ្ងៃ</option>
+            </select>
+          </div>
+          <!-- បុគ្គលិកផ្នែក -->
+          <div class="field">
+            <label class="label mt-4 text">បុគ្គលិកផ្នែក</label>
+            <div class="control">
+              <select class="label mt-2 drop" name="ផែ្នក" id="position1" >
+                <option value="">សូមជ្រើសរើស</option>
+                <option value="IT">IT</option>
+                <option value="Stock">Stock</option>
+                <option value="Accountant">Accountant</option>
+                <option value="Admin">Admin</option>
+                <option value="Sale">Sale</option>
+                <option value="Worker">Worker</option>
+              </select>
+            </div>
+          </div>
+          <!-- មុខដំណែង -->
+          <div class="field">
+            <label class="label mt-4 text">មុខដំណែង</label>
+            <div class="control">
+              <select class="label mt-2 drop" name="មុខតំណែង" id="Positions">
+                <option value="">សូមជ្រើសរើស</option>
+                <option value="ព័ត៌មានវិទ្យា">ព័ត៌មានវិទ្យា</option>
+                <option value="គិតលុយ">គិតលុយ</option>
+                <option value="រដ្ឋបាលទូទៅ">រដ្ឋបាលទូទៅ</option>
+                <option value="បុគ្គលិកផ្នែកលក់">បុគ្គលិកផ្នែកលក់</option>
+                <option value="បុគ្គលិកផ្នែកស្តុក318">បុគ្គលិកផ្នែកស្តុក318</option>
+                <option value="ប្រធានផ្នែកគ្រប់គ្រងស្តកទំនិញទូទៅ">ប្រធានផ្នែកគ្រប់គ្រងស្តកទំនិញទូទៅ</option>
+                <option value="ប្រធានឃ្លាំង៣១៨និងហាងទំនិញ">ប្រធានឃ្លាំង៣១៨និងហាងទំនិញ</option>
+                <option value="បុគ្គលិកផ្នែកគណនេយ្យ">បុគ្គលិកផ្នែកគណនេយ្យ</option>
+                <option value="ប្រមូលសាច់ប្រាក់">ប្រមូលសាច់ប្រាក់</option>
+                <option value="ប្រធានឃ្លាំង CH1">ប្រធានឃ្លាំង CH1</option>
+                <option value="ប្រធានរដ្ឋបាលឃ្លាំង CH1">រដ្ឋបាលឃ្លាំង CH1</option>
+                <option value="ជំនូយការប្រធានឃ្លាំង CH1">ជំនូយការប្រធានឃ្លាំង CH1</option>
+                <option value="ប្រធានឃ្លាំង CKD">ប្រធានឃ្លាំង CKD</option>
+                <option value="ជំនួយការប្រធានឃ្លាំង CKD">ជំនួយការប្រធានឃ្លាំង CKD</option>
+                <option value="ប្រធានរដ្ឋបាលឃ្លាំង CKD">រដ្ឋបាលឃ្លាំង CKD</option>
+                <option value="ប្រធានឃ្លាំង ST1">ប្រធានឃ្លាំង ST1</option>
+                <option value="ប្រធានឃ្លាំង PSP">ប្រធានឃ្លាំង PSP</option>
+                <option value="លើកទំនិញ">លើកទំនិញ</option>
+                <option value="បើកបរកង់បី">បើកបរកង់បី</option>
+                <option value="បើកបររថយន្ត">បើកបររថយន្ត</option>
+              </select>
+            </div>
+          </div>
+          <!-- សាខា -->
+          <div class="field">
+            <label class="label mt-4 text">សាខា</label>
+            <div class="control">
+              <select class="label mt-2 drop" name="សាខា" id="Branch" required>
+                <option value="">សូមជ្រើសរើស</option>
+                <option value="ហាងទំនិញ 318">ហាងទំនិញ 318</option>
+                <option value="ការិយាល័យកណ្តាល">ការិយាល័យកណ្តាល</option>
+                <option value="ឃ្លាំង CH1">ឃ្លាំង CH1</option>
+                <option value="ឃ្លាំង CKD">ឃ្លាំង CKD</option>
+                <option value="ឃ្លាំង ST1">ឃ្លាំង ST1</option>
+                <option value="ឃ្លាំង PSP">ឃ្លាំង PSP</option>
+              </select>
+            </div>
+          </div>
+          <!-- ថ្ងៃខែឆ្នាំឈប់/OT/មកយឺត/ភ្លេចស្កេន -->
+          <div class="field">
+            <label class="label text">ថ្ងៃខែឆ្នាំឈប់/OT/មកយឺត/ភ្លេចស្កេន</label>
+            <div class="control">
+              <input
+                class="input drop"
+                type="date"
+                placeholder=""
+                name="ថ្ងៃខែឆ្នាំឈប់" id="date"
+              />
+            </div>
+          </div>
+          <!-- ថៃ្ងចូលសងវិញ -->
+          <div class="field">
+            <label class="label text">ថៃ្ងចូលសងវិញ</label>
+            <div class="control">
+              <input
+                class="input drop" type="date"
+                placeholder="Your Date of Birth"
+                name="ថៃ្ងចូលសងវិញ"
+              />
+            </div>
+          </div>
+          <!-- ចំនួនម៉ោងយឺត -->
+          <div class="field">
+            <label class="label text">ចំនួនម៉ោងយឺត</label>
+            <div class="control">
+              <input
+                class="input drop" type="text" placeholder="បំពេញចំនួនម៉ោង" name="ចំនួនម៉ោងយឺត"
+              />
+            </div>
+          </div>
+          <!-- ភ្លេចចូល -->
+          <div class="field">
+            <label class="label mt-4 text">ភ្លេចស្កេនចូល</label>
+            <div class="control">
+              <select class="label mt-2 drop" name="ភ្លេចស្កេនមេដៃចូល " id="position1">
+                <option value="">សូមជ្រើសរើស</option>
+                <option value="ភ្លេចចូល 1ដង">ភ្លេចចូល 1ដង</option>
+                <option value="ភ្លេចចូល 2ដង">ភ្លេចចូល 2ដង</option>
+                <option value="ភ្លេចចូល 3ដង">ភ្លេចចូល 3ដង</option>
+                <option value="ភ្លេចចូល 4ដង">ភ្លេចចូល 4ដង</option>
+              </select>
+            </div>
+          </div>
+          <!-- ភ្លេចចេញ -->
+          <div class="field">
+            <label class="label mt-4 text">ភ្លេចស្កេនចេញ</label>
+            <div class="control">
+              <select class="label mt-2 drop" name="ភ្លេចស្កេនមេដៃចេញ" id="position1">
+                <option value="">សូមជ្រើសរើស</option>
+                <option value="ភ្លេចចេញ 1ដង">ភ្លេចចេញ 1ដង</option>
+                <option value="ភ្លេចចេញ 2ដង">ភ្លេចចេញ 2ដង</option>
+                <option value="ភ្លេចចេញ 3ដង">ភ្លេចចេញ 3ដង</option>
+                <option value="ភ្លេចចេញ 4ដង">ភ្លេចចេញ 4ដង</option>
+              </select>
+            </div>
+          </div>
+          <!-- ម៉ោងចូល -->
+          <div class="field">
+            <label class="label text">ម៉ោងចូល</label>
+            <div class="control">
+              <input
+                class="input drop" type="time"
+                placeholder=" Time In"
+                name="ម៉ោងចូល"
+              />
+            </div>
+          </div>
+          <!-- ម៉ោងចេញ -->
+          <div class="field">
+            <label class="label text">ម៉ោងចេញ</label>
+            <div class="control">
+              <input
+                class="input drop" type="time"
+                placeholder=" Time Out"
+                name="ម៉ោងចេញ"
+              />
+            </div>
+          </div>
+          <!-- ចំនួនម៉ោងសរុប -->
+          <div class="field">
+            <label class="label text">ចំនួនម៉ោងសរុប</label>
+            <div class="control">
+              <input
+                class="input drop" type="text"
+                placeholder="បំពេញចំនួនម៉ោងសរុប(8h30mn)"  name="ម៉ោងសរុប" />
+            </div>
+          </div>
+          <!-- ម៉ោងចូលសង -->
+          <div class="field">
+            <label class="label text">ម៉ោងចូលសង</label>
+            <div class="control">
+              <input
+                class="input drop" type="time"
+                placeholder="Time In"
+                name="ម៉ោងចូលសង"
+              />
+            </div>
+          </div>
+          <!-- ម៉ោងចេញសង -->
+          <div class="field">
+            <label class="label text">ម៉ោងចេញសង</label>
+            <div class="control">
+              <input
+                class="input drop" type="time"
+                placeholder="Time Out"
+                name="ម៉ោងចេញសង"
+              />
+            </div>
+          </div>
+          <!-- ចំនួនម៉ោងសរុប -->
+          <div class="field">
+            <label class="label text">ម៉ោងសងសរុប</label>
+            <div class="control">
+              <input
+                class="input drop" type="text"
+                placeholder="បំពេញចំនួនម៉ោងសរុប(8h30mn)"  name="ម៉ោងសងសរុប" />
+            </div>
+          </div>
+          <!-- មូលហេតុ -->
+          <div class="field">
+            <label class="label text">មូលហេតុ</label>
+            <div class="control">
+              <input
+                class="input drop" type="text"
+                placeholder="បំពេញមូលហេតុរបស់អ្នក"  name="មូលហេតុ" id="reason"/>
+            </div>
+          </div>
+          <!-- ប្រគល់ការងារឱ្យ -->
+          <div class="field">
+            <label class="label text">ប្រគល់ការងារឱ្យ</label>
+            <div class="control">
+              <input
+                class="input drop" type="text"
+                placeholder="បំពេញអ្នកប្រគល់ការងារឱ្យ"  name="ប្រគល់ការងារឱ្យ" />
+            </div>
+          </div>
+          <!-- ទីកន្លែង -->
+          <div class="field">
+            <label class="label text">ទីកន្លែង</label>
+            <div class="control">
+              <input
+                class="input drop" type="text"
+                placeholder="បំពេញទីកន្លែង"  name="ទីកន្លែង" />
+            </div>
+          </div>
+          <!-- លេខទំនាក់ទំនង -->
+          <div class="field">
+            <label class="label text">លេខទំនាក់ទំនង</label>
+            <div class="control">
+              <input
+                class="input drop" type="number"
+                placeholder="បំពេញលេខទំនាក់ទំនងផ្ទាល់ខ្លួនរបស់អ្នក"  name="លេខទំនាក់ទំនង" />
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button bg-primary btn" type="submit" id="submit-button">
+                បញ្ជូន</button>
+            </div>
+          </div>
+          <div class="container justify-content-end mt-5 text-center btn-home">
+            <!-- "Go to Home" Button -->
+            <a href="index1.html" class="btn btn-primary">ទៅទំព័រដើមវិញ</a>
+          </div>
+          <div
+          id="message"
+          style="
+            display: none;
+            position: relative;
+            margin: 20px;
+            top: -3.7rem;
+            width: 60%;
+            left: 6rem;
+            font-weight: bold;
+            color: green;
+            padding: 8px;
+            background-color: beige;
+            border-radius: 4px;
+            border-color: aquamarine;
+          "
+        >
+      </div>
+    </div>
+    </form>
+    </div>
+
+
+
+    <div id="page-2" class="page">
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTUytrU3yXhmeJ1OUyLOKd487Z5PvjjWQ8fpR8PlwPncffxHd_hdPEUvDK0AkKTFhiOhGnCLnBcReoc/pubhtml?widget=true&amp;headers=false" width="100%" height="500px" class="mt-6"></iframe>
     </div>
 
 
   <script>
         function showPage(pageId) {
         document.getElementById('main').style.display = 'none'; // Hide main page
+        document.getElementById('text').style.display = 'none'; // Hide main page
         document.getElementById('page-' + pageId).style.display = 'block'; // Show the selected page
     }
 
@@ -257,6 +593,106 @@ textareas.forEach((textarea) => {
     textarea.style.height = textarea.scrollHeight + 'px'; // Adjust height
   });
 });
+var telegram_bot_id = "7680707479:AAG38M8FpFbuVfqWCLwxUKo7l7iKJCXOEz8";
+//chat id
+var chat_id = -1002496391098;
+var numberofdays, date, namerequest,Positions,Branch,reason;
+var ready = function () {
+namerequest = document.getElementById("namerequest").value;
+date = document.getElementById("date").value;
+numberofdays = document.getElementById("numberofdays").value;
+typeofrequest = document.getElementById("typeofrequest").value;
+Positions = document.getElementById("Positions").value;
+Branch = document.getElementById("Branch").value;
+reason = document.getElementById("reason").value;
+  message = "\n- អ្នកស្នើរសុំ៖ " + namerequest + "\n- មុខដំណែង៖  " + Positions + "\n- សាខា៖  " + Branch + "\n- ថ្ងៃខែឆ្នាំ៖  " + date + "\n- ចំនួនថ្ងៃ៖  " + numberofdays + "\n- ប្រភេទនៃការស្នើរសុំ​៖  " + typeofrequest  + "\n- មូលហេតុ៖  " + reason;
+};
+var sender = function () {
+  ready();
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "cache-control": "no-cache"
+      },
+      "data": JSON.stringify({
+          "chat_id": chat_id,
+          "text": message
+      })
+  };
+  $.ajax(settings).done(function (response) {
+      console.log(response);
+  });
+  document.getElementById("name").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("message").value = "";
+  return false;
+};
+
+document.getElementById("form").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent the default form submission
+      document.getElementById("message").textContent = "កំពុងបញ្ជូន";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("submit-button").disabled = true;
+
+      // Collect the form data
+      var formData = new FormData(this);
+      var keyValuePairs = [];
+      for (var pair of formData.entries()) {
+        keyValuePairs.push(pair[0] + "=" + pair[1]);
+      }
+
+      var formDataString = keyValuePairs.join("&");
+
+      // Send a POST request to your Google Apps Script
+      fetch(
+        "https://script.google.com/macros/s/AKfycbzGaGmkgIpxi2c_2D3NMYgv5CNx0HdGgE3JuZhcvrwYADYAB8iENs_yCaIiVcbvHQ5-/exec",
+        
+        {
+          redirect: "follow",
+          method: "POST",
+          body: formDataString,
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+        }
+      )
+        .then(function (response) {
+          // Check if the request was successful
+          if (response) {
+            return response; // Assuming your script returns JSON response
+          } else {
+            throw new Error("Failed to submit the form.");
+          }
+        })
+        .then(function (data) {
+          // Display a success message
+          document.getElementById("message").textContent =
+            "បានបញ្ជូនរួចរាល់";
+          document.getElementById("message").style.display = "block";
+          document.getElementById("message").style.backgroundColor = "green";
+          document.getElementById("message").style.color = "beige";
+          document.getElementById("submit-button").disabled = false;
+          document.getElementById("form").reset();
+
+          setTimeout(function () {
+            document.getElementById("message").textContent = "";
+            document.getElementById("message").style.display = "none";
+          }, 2600);
+        })
+        .catch(function (error) {
+          // Handle errors, you can display an error message here
+          console.error(error);
+          document.getElementById("message").textContent =
+            "An error occurred while submitting the form.";
+          document.getElementById("message").style.display = "block";
+        });
+    });
+
+
   </script>
 </body>
 </html>
