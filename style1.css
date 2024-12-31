@@ -44,16 +44,6 @@ body.html{
    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.192);
 
  }
- .main-form-request{
-  position: relative;
-  align-items: center;
-  width: 100%;
-  top: -5rem;
- }
- .main-form{
-   top: -1rem;
-   width: 100%;
- }
  .menu{
    right: 5rem;
    position: relative;
