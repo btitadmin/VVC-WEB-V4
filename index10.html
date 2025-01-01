@@ -504,6 +504,16 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+.list-group a{
+            text-decoration: none;
+        }
+        #searchInput {
+            color: blue;
+        }
+        input::placeholder{
+            color: gray;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -516,20 +526,24 @@
 </nav>
 <div class="main-header mt-6">
   <div class="container mt-3 main-list-meeting">
-  <div class="mb-3">
+  <div class="mb-3" id="sort">
     <label for="sortBy" class="form-label">Sort By</label>
     <select class="form-select" id="sortBy" onchange="sortMeetings()">
       <option value="date-asc">A-Z</option>
       <option value="date-desc">Z-A</option>
     </select>
   </div>
+  <div id="main-search">
+    <h1 class="mb-4">ស្វែងរកការប្រជុំ <small class="text-red">*</small></h1>
+    <input type="text" id="searchInput" class="form-control mb-3" placeholder="ស្វែងរកការប្រជុំ...">
+    </div>
 <!--  main-page -->
 <div id="main" class="main-page">
-  <ul class="list-group" id="meetingList">
+  <ul class="list-group" id="itemList">
         <a href="#" data-page="1">
-         <li class="list-group-item1 " data-date="02" data-participants="50">
+         <li class="list-group-item1 " id="meetingList" data-date="01" data-participants="50" data-section="01">
             <div class="menu-list1">
-              <span class="fs-6">01 - ការប្រជុំប្រចាំខែការិយាល័យកណ្តាល<br><p class="mt-2 txt-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ៤កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨ ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី៤ ខែធ្នូ ឆ្នាំ២០២៤ ”</p></span>
+              <span class="fs-6"style="color: gold; font-weight: bold; font-family: Kh Muol;">01 - ការប្រជុំប្រចាំខែការិយាល័យកណ្តាល<br><p class="mt-2 txt-date" style="font-family: none; color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ៤កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨ ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី4 ខែធ្នូ ឆ្នាំ2024 ”</p></span>
               <div class="chevron-right">
               <i class="bi bi-chevron-right"></i>
                 </div>
@@ -577,6 +591,8 @@
     // Function to show a specific page and hide the main page
     function showPage(pageId) {
         document.getElementById('main').style.display = 'none'; // Hide main page
+        document.getElementById('sort').style.display = 'none'; // Hide sort page
+        document.getElementById('main-search').style.display = 'none'; // Hide main-search page
         document.getElementById('page-' + pageId).style.display = 'block'; // Show the selected page
     }
 
@@ -596,7 +612,7 @@
         });
     });
     function sortMeetings() {
-    const meetingList = document.getElementById('meetingList');
+    const meetingList = document.getElementById('itemList');
     const meetings = Array.from(meetingList.getElementsByClassName('list-group-item1'));
     const sortBy = document.getElementById('sortBy').value;
 
@@ -615,6 +631,15 @@
     meetingList.innerHTML = '';
     meetings.forEach(meeting => meetingList.appendChild(meeting));
   }
+  document.getElementById('searchInput').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('#itemList .list-group-item1');
+      
+            items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(filter) ? '' : 'none';
+      });
+    });
 </script>
 
 </body>
