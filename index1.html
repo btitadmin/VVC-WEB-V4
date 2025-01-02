@@ -379,18 +379,70 @@
         position: absolute;
         top: 1.6rem;
     }
+
+.loading-page {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  color: #191654;
+}
+
+#svg {
+  height: 150px;
+  width: 150px;
+  stroke: white;
+  fill-opacity: 0;
+  stroke-width: 3px;
+  stroke-dasharray: 4500;
+  animation: draw 5s ease;
+  -webkit-animation: draw 5s ease;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 4500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.name-container {
+  height: 30px;
+  overflow: hidden;
+}
+
+.logo-name {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  margin-left: 20px;
+  font-weight: bolder;
+}
+
   </style>
 </head>
 <body>
   <!-- Full-Screen Image Alert with Text, Input, and Send Button -->
-<div id="imageAlert" class="full-screen-alert">
+<!-- <div id="imageAlert" class="full-screen-alert">
   <button class="close-btn" onclick="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
   <div class="img">
   <img src="https://i.ibb.co/zh8RrC3/image.jpg" alt="Full Screen Image" width="600px"></div>
   <div class="input-container">
   </div>
   <div class="full-screen-alert2"><img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd25ud3poMWVsMXRsMXI5dHBqMGlhbnYxcHY1ZHVjb3VxcjJ3bW9vciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/peAFQfg7Ol6IE/giphy.webp" alt=""></div>
-</div>
+</div> -->
 <!--   pop up  -->
 <!--   <div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -499,6 +551,21 @@
     <a href="index7.html"><i class="fa-solid fa-users"></i></a>
   </div>
   </div>
+  <div class="loading-page d-flex">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 384 512">
+        <path
+            d="M19.7 34.5c16.3-6.8 35 .9 41.8 17.2L192 364.8 322.5 51.7c6.8-16.3 25.5-24 41.8-17.2s24 25.5 17.2 41.8l-160 384c-5 11.9-16.6 19.7-29.5 19.7s-24.6-7.8-29.5-19.7L2.5 76.3c-6.8-16.3 .9-35 17.2-41.8z" />
+    </svg>
+
+
+    <div class="name-container">
+        <div class="logo-name">VVC</div>
+    </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
+    integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -641,6 +708,32 @@ ScrollReveal().reveal(".ani-6", {
       alert("Please enter a message before sending.");
     }
   }
+
+  gsap.fromTo(
+  ".loading-page",
+  { opacity: 1 },
+  {
+    opacity: 0,
+    display: "none",
+    duration: 1.5,
+    delay: 1.5,
+  }
+);
+
+gsap.fromTo(
+  ".logo-name",
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    y: 0,
+    opacity: 1,
+    duration: 2,
+    delay: 0.1,
+  }
+);
+
   </script>
 </body>
 </html>
