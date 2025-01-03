@@ -382,10 +382,10 @@
 
 .loading-page {
   position: absolute;
-  z-index: 99;
   top: 0;
+  z-index: 99;
   left: 0;
-/*   background: linear-gradient(to right, #2c5364, #203a43, #0f2027); */
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
 
   height: 100%;
   width: 100%;
@@ -430,10 +430,21 @@
   margin-left: 20px;
   font-weight: bolder;
 }
-
   </style>
 </head>
 <body>
+  <div class="loading-page">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 384 512">
+        <path
+            d="M19.7 34.5c16.3-6.8 35 .9 41.8 17.2L192 364.8 322.5 51.7c6.8-16.3 25.5-24 41.8-17.2s24 25.5 17.2 41.8l-160 384c-5 11.9-16.6 19.7-29.5 19.7s-24.6-7.8-29.5-19.7L2.5 76.3c-6.8-16.3 .9-35 17.2-41.8z" />
+    </svg>
+
+
+    <div class="name-container">
+        <div class="logo-name">VVC</div>
+    </div>
+</div>
   <!-- Full-Screen Image Alert with Text, Input, and Send Button -->
 <!-- <div id="imageAlert" class="full-screen-alert">
   <button class="close-btn" onclick="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
@@ -551,18 +562,6 @@
     <a href="index7.html"><i class="fa-solid fa-users"></i></a>
   </div>
   </div>
-<!--   <div class="loading-page d-flex">
-    <svg id="svg" xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 384 512">
-        <path
-            d="M19.7 34.5c16.3-6.8 35 .9 41.8 17.2L192 364.8 322.5 51.7c6.8-16.3 25.5-24 41.8-17.2s24 25.5 17.2 41.8l-160 384c-5 11.9-16.6 19.7-29.5 19.7s-24.6-7.8-29.5-19.7L2.5 76.3c-6.8-16.3 .9-35 17.2-41.8z" />
-    </svg>
-
-
-    <div class="name-container">
-        <div class="logo-name">VVC</div>
-    </div> -->
-</div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
     integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
