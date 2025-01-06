@@ -43,41 +43,44 @@
     .btn:disabled {
       opacity: 0.5;
     }
+    .main-header{
+      font-family: Krasar;
+    }
   </style>
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-center">Fingerprint Check-In/Out System</h1>
+  <div class="container mt-5 main-header">
+    <h1 class="text-center">Fingerprint Check-In/Out</h1>
     <div class="card mt-4">
       <div class="card-body">
-        <h5 class="card-title">Scan Your Fingerprint</h5>
+        <h5 class="card-title fs-6"><mark>*សូមស្កេនទិន្នន័យឱ្យបានត្រឹមត្រូវទាន់ពេលវេលា។ សូមអរគុណ ។</mark></h5>
 
         <!-- User Name Input -->
-        <div class="mb-3">
-          <label for="userNameInput" class="form-label">Enter Your Name</label>
+        <div class="mb-3 mt-4">
+          <label for="userNameInput" class="form-label">បញ្ជូលឈ្មោះអ្នកឱ្យបានត្រឹមត្រូវ</label>
           <input type="text" id="userNameInput" class="form-control" placeholder="Enter your name" required>
         </div>
 
         <!-- Action Selection Dropdown -->
         <div class="mb-3">
-          <label for="actionSelect" class="form-label">Select Action</label>
+          <label for="actionSelect" class="form-label">ជ្រើសរើសប្រភេទស្កេន</label>
           <select id="actionSelect" class="form-select">
             <option value="Check-In">Check-In</option>
             <option value="Check-Out">Check-Out</option>
           </select>
         </div>
 
-        <button id="scanFingerprint" class="btn btn-primary mb-3">Start Scan</button>
+        <button id="scanFingerprint" class="btn btn-primary mb-3">ចាប់ផ្តើមស្កេន</button>
 
         <!-- Action Information -->
         <div class="action-info">
-          <p><span class="label">Action:</span> <span id="action" class="value">N/A</span></p>
-          <p><span class="label">Timestamp:</span> <span id="timestamp" class="value">N/A</span></p>
-          <p><span class="label">Location:</span> <span id="location" class="value">Fetching location...</span></p>
-          <p><span class="label">Map:</span> <a id="mapLink" class="map-link" href="#" target="_blank">View on Map</a></p>
+          <p><span class="label">ប្រភេទស្កេន៖</span> <span id="action" class="value">N/A</span></p>
+          <p><span class="label">ថ្ងៃខែឆ្នាំ/ម៉ោង៖</span> <span id="timestamp" class="value">N/A</span></p>
+          <p><span class="label">ការចាប់ទីតាំងរបស់អ្នក៖</span> <span id="location" class="value">Fetching location...</span></p>
+          <p><span class="label">ទីតាំងរបស់អ្នក៖</span> <a id="mapLink" class="map-link" href="#" target="_blank">View on Map</a></p>
         </div>
         <!-- Status Message -->
-        <p id="status" class="status-message text-muted">Waiting for fingerprint scan...</p>
+        <p id="status" class="status-message text-muted">រងចាំការស្កេនរបស់អ្នក...</p>
       </div>
     </div>
   </div>
@@ -115,19 +118,19 @@
             Math.abs(longitude - allowedLongitude) <= tolerance;
 
           if (!isWithinBounds) {
-            locationElement.textContent += " (Outside allowed location)";
-            mapLinkElement.textContent = "Not allowed to scan.";
+            locationElement.textContent += " (ទីតាំងនេះមិនត្រឹមត្រូវទេ!)";
+            mapLinkElement.textContent = "មិនអាចស្កេនទីតាំងបានទេ!";
           }
         },
         () => {
           locationElement.textContent = "Unable to fetch location.";
-          mapLinkElement.textContent = "Map not available.";
+          mapLinkElement.textContent = "សូមចុចត្រង់នេះដើម្បីបើកទីតាំង";
           mapLinkElement.href = "#";
         }
       );
     } else {
       locationElement.textContent = "Geolocation is not supported by this browser.";
-      mapLinkElement.textContent = "Map not available.";
+      mapLinkElement.textContent = "ផែនទីមិនមានទេ។";
       mapLinkElement.href = "#";
     }
 
@@ -200,7 +203,7 @@
       const userName = document.getElementById('userNameInput').value.trim();
 
       if (!userName) {
-        alert("Please enter your name.");
+        alert("សូមបញ្ជូលឈ្មោះរបស់អ្នក");
         scanButton.disabled = false; // Re-enable the button in case of missing name
         scanButton.style.display = 'block'; // Show the button again
         localStorage.removeItem("buttonStateTime"); // Reset localStorage
@@ -213,15 +216,15 @@
       // Set action as per selected action (Check-In or Check-Out)
       if (action === "Check-Out") {
         userState[userName] = "Check-Out";
-        statusElement.textContent = `Goodbye, ${userName}!`;
+        statusElement.textContent = `សំណាងល្អ, ${userName}!`;
         actionElement.textContent = "Check-Out";
 
         // Send message to Telegram bot with full map link
         const mapLink = `https://www.google.com/maps?q=${currentLatitude},${currentLongitude}`;
-        sendToTelegram(`ឈ្មោះ៖ ${userName}\n Checked out \n ថ្ងៃ៖ ${currentTimeFormatted}.\n ទីតាំង: [មើលទីតាំង] ${mapLink}`);
+        sendToTelegram(`\n ឈ្មោះ៖ ${userName}\n Checked out \n ថ្ងៃ៖ ${currentTimeFormatted}.\n ទីតាំង: [ពិនិត្យទីតាំង] (${mapLink}`);
       } else {
         userState[userName] = "Check-In";
-        statusElement.textContent = `Welcome, ${userName}!`;
+        statusElement.textContent = `សូមស្វាគមន៍, ${userName}!`;
         actionElement.textContent = "Check-In";
 
         // Send message to Telegram bot with full map link
