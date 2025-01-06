@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fingerprint Check-In/Out System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    .card-body {
+      background-color: #f8f9fa;
+    }
+
+    .action-info p {
+      font-size: 1.1rem;
+    }
+
+    .action-info .label {
+      font-weight: bold;
+    }
+
+    .action-info .value {
+      color: #007bff;
+    }
+
+    .map-link {
+      word-wrap: break-word;
+    }
+
+    .status-message {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .modal-dialog {
+      max-width: 400px;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Fingerprint Check-In/Out System</h1>
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Scan Your Fingerprint</h5>
+
+        <!-- User Name Input -->
+        <div class="mb-3">
+          <label for="userNameInput" class="form-label">Enter Your Name</label>
+          <input type="text" id="userNameInput" class="form-control" placeholder="Enter your name" required>
+        </div>
+
+        <!-- Action Selection Dropdown -->
+        <div class="mb-3">
+          <label for="actionSelect" class="form-label">Select Action</label>
+          <select id="actionSelect" class="form-select">
+            <option value="Check-In">Check-In</option>
+            <option value="Check-Out">Check-Out</option>
+          </select>
+        </div>
+
+        <button id="scanFingerprint" class="btn btn-primary mb-3">Start Scan</button>
+
+        <!-- Action Information -->
+        <div class="action-info">
+          <p><span class="label">Action:</span> <span id="action" class="value">N/A</span></p>
+          <p><span class="label">Timestamp:</span> <span id="timestamp" class="value">N/A</span></p>
+          <p><span class="label">Location:</span> <span id="location" class="value">Fetching location...</span></p>
+          <p><span class="label">Map:</span> <a id="mapLink" class="map-link" href="#" target="_blank">View on Map</a></p>
+        </div>
+        <!-- Status Message -->
+        <p id="status" class="status-message text-muted">Waiting for fingerprint scan...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Store check-in/out state
+    const userState = {};
+
+    // Allowed location bounds
+    const allowedLatitude = 11.55089;
+    const allowedLongitude = 104.91219;
+    const tolerance = 0.01;
+
+    // Get user's location
+    const locationElement = document.getElementById('location');
+    const mapLinkElement = document.getElementById('mapLink');
+
+    let isWithinBounds = false;
+    let currentLatitude = 0;
+    let currentLongitude = 0;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          currentLatitude = latitude;
+          currentLongitude = longitude;
+
+          locationElement.textContent = `Lat: ${latitude.toFixed(5)}, Long: ${longitude.toFixed(5)}`;
+          mapLinkElement.href = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+          // Check if user is within allowed location bounds
+          isWithinBounds =
+            Math.abs(latitude - allowedLatitude) <= tolerance &&
+            Math.abs(longitude - allowedLongitude) <= tolerance;
+
+          if (!isWithinBounds) {
+            locationElement.textContent += " (Outside allowed location)";
+            mapLinkElement.textContent = "Not allowed to scan.";
+          }
+        },
+        () => {
+          locationElement.textContent = "Unable to fetch location.";
+          mapLinkElement.textContent = "Map not available.";
+          mapLinkElement.href = "#";
+        }
+      );
+    } else {
+      locationElement.textContent = "Geolocation is not supported by this browser.";
+      mapLinkElement.textContent = "Map not available.";
+      mapLinkElement.href = "#";
+    }
+
+    // Function to send a message to the Telegram bot
+    function sendToTelegram(message) {
+      const url = `https://api.telegram.org/bot7205851039:AAHBOJmY40GvNl7M0X_FN9Ml0Fg2T_KQpb8/sendMessage`;
+      const data = {
+        chat_id: "-1002282814819", // Chat ID
+        text: message
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Message sent to Telegram:", data);
+      })
+      .catch(error => {
+        console.error("Error sending message to Telegram:", error);
+      });
+    }
+
+    // Check if the "scanFingerprint" button should be hidden or shown
+    const buttonStateTime = localStorage.getItem("buttonStateTime");
+    const currentTime = Date.now();
+
+    if (buttonStateTime && currentTime - buttonStateTime < 100) {
+      document.getElementById('scanFingerprint').style.display = 'none'; // Hide the button if 1 minute hasn't passed yet
+    }
+
+    // Auto-show the button after 1 minute if it was hidden
+    setTimeout(() => {
+      localStorage.removeItem("buttonStateTime"); // Remove the timestamp from localStorage
+      document.getElementById('scanFingerprint').style.display = 'block'; // Show the button
+    }, 10000); // 1 minute = 60000 milliseconds
+
+    document.getElementById('scanFingerprint').addEventListener('click', () => {
+      const scanButton = document.getElementById('scanFingerprint');
+      scanButton.disabled = true; // Disable the button immediately
+      scanButton.style.display = 'none'; // Hide the button
+
+      // Store the time when the button is clicked in localStorage
+      localStorage.setItem("buttonStateTime", Date.now());
+
+      setTimeout(() => {
+        // Reload the page after 1 minute
+        window.location.reload();
+      }, 60000); // 1 minute = 60000 milliseconds
+
+      if (!isWithinBounds) {
+        alert("អ្នកមិនអាចស្កេនបានទេ! សូមមកកន្លែងធ្វើការរបស់អ្នកសិន! ប្រញាប់ឡើង!");
+        scanButton.disabled = false; // Re-enable the button in case of location error
+        scanButton.style.display = 'block'; // Show the button again
+        localStorage.removeItem("buttonStateTime"); // Reset localStorage
+        return;
+      }
+
+      const action = document.getElementById('actionSelect').value; // Get selected action (Check-In or Check-Out)
+
+      const statusElement = document.getElementById('status');
+      const actionElement = document.getElementById('action');
+      const timestampElement = document.getElementById('timestamp');
+
+      // Get the entered user name
+      const userName = document.getElementById('userNameInput').value.trim();
+
+      if (!userName) {
+        alert("Please enter your name.");
+        scanButton.disabled = false; // Re-enable the button in case of missing name
+        scanButton.style.display = 'block'; // Show the button again
+        localStorage.removeItem("buttonStateTime"); // Reset localStorage
+        return;
+      }
+
+      // Get the current time
+      const currentTimeFormatted = new Date().toLocaleString();
+
+      // Set action as per selected action (Check-In or Check-Out)
+      if (action === "Check-Out") {
+        userState[userName] = "Check-Out";
+        statusElement.textContent = `Goodbye, ${userName}!`;
+        actionElement.textContent = "Check-Out";
+
+        // Send message to Telegram bot with full map link
+        const mapLink = `https://www.google.com/maps?q=${currentLatitude},${currentLongitude}`;
+        sendToTelegram(`ឈ្មោះ៖ ${userName}\n Checked out \n ថ្ងៃ៖ ${currentTimeFormatted}.\n ទីតាំង: [មើលទីតាំង] ${mapLink}`);
+      } else {
+        userState[userName] = "Check-In";
+        statusElement.textContent = `Welcome, ${userName}!`;
+        actionElement.textContent = "Check-In";
+
+        // Send message to Telegram bot with full map link
+        const mapLink = `https://www.google.com/maps?q=${currentLatitude},${currentLongitude}`;
+        sendToTelegram(`ឈ្មោះ៖ ${userName}\n Checked in \n ថ្ងៃ៖ ${currentTimeFormatted}.\n ទីតាំង: [មើលទីតាំង]${mapLink}`);
+      }
+
+      timestampElement.textContent = currentTimeFormatted;
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
