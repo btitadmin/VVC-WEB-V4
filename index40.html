@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Check-In/Check-Out</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+        }
+        .log {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Scan Check-In/Check-Out</h1>
+
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <div class="input-group">
+                    <input type="text" id="scanInput" class="form-control" placeholder="Scan or enter code">
+                    <button class="btn btn-primary" id="checkInBtn">Check-In</button>
+                    <button class="btn btn-danger" id="checkOutBtn">Check-Out</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h4>Activity Log</h4>
+                <ul class="list-group log" id="activityLog">
+                    <!-- Logs will appear here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scanInput = document.getElementById('scanInput');
+            const checkInBtn = document.getElementById('checkInBtn');
+            const checkOutBtn = document.getElementById('checkOutBtn');
+            const activityLog = document.getElementById('activityLog');
+
+            const TELEGRAM_BOT_TOKEN = '7205851039:AAHBOJmY40GvNl7M0X_FN9Ml0Fg2T_KQpb8';
+            const TELEGRAM_CHAT_ID = '-1002282814819';
+
+            function logActivity(action, code, locationLink) {
+                const timestamp = new Date().toLocaleString();
+                const listItem = document.createElement('li');
+                listItem.className = `list-group-item ${action === 'Check-In' ? 'list-group-item-success' : 'list-group-item-danger'}`;
+                listItem.textContent = `${action}: ${code} at ${timestamp} - ${locationLink}`;
+                activityLog.prepend(listItem);
+
+                sendToTelegram(`${action}: ${code} at ${timestamp} - ${locationLink}`);
+            }
+
+            function sendToTelegram(message) {
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to send message to Telegram', response);
+                    }
+                })
+                .catch(error => console.error('Error sending message to Telegram', error));
+            }
+
+            function getLocationAndSend(action, code) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                        
+                        logActivity(action, code, locationLink);
+                    }, (error) => {
+                        alert('Unable to retrieve location. Proceeding without location data.');
+                        logActivity(action, code, 'Location data not available');
+                    });
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                    logActivity(action, code, 'Location data not available');
+                }
+            }
+
+            checkInBtn.addEventListener('click', () => {
+                const code = scanInput.value.trim();
+                if (code) {
+                    getLocationAndSend('Check-In', code);
+                    scanInput.value = '';
+                    scanInput.focus();
+                } else {
+                    alert('Please enter a code.');
+                }
+            });
+
+            checkOutBtn.addEventListener('click', () => {
+                const code = scanInput.value.trim();
+                if (code) {
+                    getLocationAndSend('Check-Out', code);
+                    scanInput.value = '';
+                    scanInput.focus();
+                } else {
+                    alert('Please enter a code.');
+                }
+            });
+
+            // Allow Enter key to trigger Check-In
+            scanInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    checkInBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
