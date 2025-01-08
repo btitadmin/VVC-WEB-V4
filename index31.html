@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Check-In/Out Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .event-list {
+      margin-top: 20px;
+    }
+    .event-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .event-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="text-center">Check-In/Out Data Chart</h1>
+  
+  <!-- User Name Filter -->
+  <div class="mb-3">
+    <label for="userNameFilter" class="form-label">Select User</label>
+    <select id="userNameFilter" class="form-select" onchange="reloadChartData()">
+      <option value="all">All Users</option>
+      <!-- User names will be populated dynamically -->
+    </select>
+  </div>
+
+  <canvas id="checkinChart"></canvas>
+  
+  <div class="mt-4">
+    <button class="btn btn-secondary" onclick="reloadChartData()">Refresh Chart</button>
+    <button class="btn btn-danger" onclick="clearUserData()">Clear All Data</button>
+    <button class="btn btn-warning" onclick="openFileUpload()">Restore Data</button>
+    <button class="btn btn-danger" onclick="clearUserDataSpecific()">Clear Selected User Data</button>
+    <button class="btn btn-danger" onclick="deleteUser()">Delete Selected User</button>
+    <input type="file" id="fileInput" style="display:none" onchange="restoreFromFile(event)" />
+  </div>
+
+  <!-- List of Check-Ins/Check-Outs -->
+  <div class="event-list">
+    <h3>Events</h3>
+    <ul id="eventList">
+      <!-- Events will be displayed here -->
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Temporary backup of the data
+  let backupData = null;
+
+  // Function to load the user data from localStorage
+  function loadUserData() {
+    const userData = JSON.parse(localStorage.getItem("userData")) || [];
+    return userData;
+  }
+
+  // Function to get unique user names for the filter dropdown
+  function getUniqueUserNames(userData) {
+    const userNames = [];
+    userData.forEach(entry => {
+      if (!userNames.includes(entry.userName)) {
+        userNames.push(entry.userName);
+      }
+    });
+    return userNames;
+  }
+
+  // Function to process the user data for chart
+  function processData(userNameFilter) {
+    const userData = loadUserData();
+    const labels = [];
+    const checkInCount = [];
+    const checkOutCount = [];
+
+    userData.forEach(entry => {
+      // Apply filter if userNameFilter is not 'all'
+      if (userNameFilter !== "all" && entry.userName !== userNameFilter) {
+        return;
+      }
+
+      const userName = entry.userName;
+      if (!labels.includes(userName)) {
+        labels.push(userName);
+        checkInCount.push(0);
+        checkOutCount.push(0);
+      }
+      const index = labels.indexOf(userName);
+
+      if (entry.action === "Check-In") {
+        checkInCount[index]++;
+      } else if (entry.action === "Check-Out") {
+        checkOutCount[index]++;
+      }
+    });
+
+    return {
+      labels,
+      checkInCount,
+      checkOutCount
+    };
+  }
+
+  // Function to create and display the chart
+  function createChart(userNameFilter) {
+    const { labels, checkInCount, checkOutCount } = processData(userNameFilter);
+
+    const ctx = document.getElementById('checkinChart').getContext('2d');
+    
+    // If the chart already exists, destroy it before creating a new one
+    if (window.checkInOutChart) {
+      window.checkInOutChart.destroy();
+    }
+
+    window.checkInOutChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Check-In Count',
+          data: checkInCount,
+          backgroundColor: 'rgba(0, 123, 255, 0.6)',
+          borderColor: 'rgba(0, 123, 255, 1)',
+          borderWidth: 1
+        }, {
+          label: 'Check-Out Count',
+          data: checkOutCount,
+          backgroundColor: 'rgba(220, 53, 69, 0.6)',
+          borderColor: 'rgba(220, 53, 69, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Add click event to the chart
+    window.checkInOutChart.canvas.onclick = (event) => {
+      const activePoints = window.checkInOutChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+      if (activePoints.length > 0) {
+        const firstPoint = activePoints[0];
+        const selectedUser = window.checkInOutChart.data.labels[firstPoint.index];
+        displayEventsForUser(selectedUser);
+      }
+    };
+  }
+
+  // Function to display the check-in/check-out events for a selected user
+  function displayEventsForUser(userName) {
+    const userData = loadUserData();
+    const filteredEvents = userData.filter(entry => entry.userName === userName);
+    const eventListElement = document.getElementById('eventList');
+    
+    eventListElement.innerHTML = ''; // Clear previous events
+
+    filteredEvents.forEach(event => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${event.action} at ${event.timestamp} (Lat: ${event.location.latitude}, Long: ${event.location.longitude})`;
+      eventListElement.appendChild(listItem);
+    });
+
+    if (filteredEvents.length === 0) {
+      eventListElement.innerHTML = '<li>No events found for this user.</li>';
+    }
+  }
+
+  // Function to refresh the chart by reloading the data without reloading the page
+  function reloadChartData() {
+    const selectedUserName = document.getElementById('userNameFilter').value;
+    createChart(selectedUserName); // Recreate the chart with the selected user filter
+    displayEventsForUser(selectedUserName); // Display events for the selected user
+  }
+
+  // Function to clear user data from localStorage
+  function clearUserData() {
+    if (confirm("Are you sure you want to clear all user data? This action cannot be undone.")) {
+      localStorage.removeItem("userData");
+      alert("All data has been cleared!");
+      createChart('all');  // Show data for all users
+      document.getElementById('eventList').innerHTML = '<li>No events found.</li>';
+    }
+  }
+
+  // Function to clear a specific user's data
+  function clearUserDataSpecific() {
+    const selectedUserName = document.getElementById('userNameFilter').value;
+    
+    if (selectedUserName === 'all') {
+      alert('Please select a specific user to clear their data.');
+      return;
+    }
+
+    const userData = loadUserData();
+    const filteredData = userData.filter(entry => entry.userName !== selectedUserName);
+    localStorage.setItem('userData', JSON.stringify(filteredData));
+
+    alert(`Data for user "${selectedUserName}" has been cleared!`);
+    createChart('all'); // Refresh chart after clearing user data
+    document.getElementById('eventList').innerHTML = '<li>No events found.</li>';
+  }
+
+  // Function to delete a specific user's data
+  function deleteUser() {
+    const selectedUserName = document.getElementById('userNameFilter').value;
+    
+    if (selectedUserName === 'all') {
+      alert('Please select a specific user to delete.');
+      return;
+    }
+
+    const userData = loadUserData();
+    const filteredData = userData.filter(entry => entry.userName !== selectedUserName);
+    localStorage.setItem('userData', JSON.stringify(filteredData));
+
+    alert(`User "${selectedUserName}" has been deleted!`);
+    createChart('all'); // Refresh chart after deleting user data
+    document.getElementById('eventList').innerHTML = '<li>No events found.</li>';
+  }
+
+  // Function to open file input for restoring data
+  function openFileUpload() {
+    document.getElementById('fileInput').click();
+  }
+
+  // Function to restore user data from the uploaded CSV file
+  function restoreFromFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    Papa.parse(file, {
+      complete: function(results) {
+        // Assuming the CSV has columns: userName, action, timestamp, latitude, longitude
+        const csvData = results.data;
+        
+        // Validate CSV structure and format data
+        const userData = csvData.map(row => ({
+          userName: row[0],
+          action: row[1],
+          timestamp: row[2],
+          location: {
+            latitude: parseFloat(row[3]),
+            longitude: parseFloat(row[4])
+          }
+        }));
+
+        if (userData.length > 0) {
+          localStorage.setItem('userData', JSON.stringify(userData));
+          alert('Data has been restored successfully from CSV!');
+          createChart('all'); // Refresh chart after restoring data
+        } else {
+          alert('Invalid CSV file format.');
+        }
+      },
+      header: false,
+      skipEmptyLines: true
+    });
+  }
+
+  // Function to populate the user filter dropdown
+  function populateUserFilter() {
+    const userData = loadUserData();
+    const userNames = getUniqueUserNames(userData);
+    const userNameFilterElement = document.getElementById('userNameFilter');
+
+    userNames.forEach(userName => {
+      const option = document.createElement('option');
+      option.value = userName;
+      option.textContent = userName;
+      userNameFilterElement.appendChild(option);
+    });
+  }
+
+  // Initialize the page by populating the user filter and creating the chart
+  populateUserFilter();
+  createChart('all');  // Show data for all users by default
+</script>
+
+</body>
+</html>
