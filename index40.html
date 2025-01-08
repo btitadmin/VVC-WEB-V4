@@ -68,7 +68,7 @@
 
             // Send message to Telegram bot
             function sendToTelegram(message) {
-                const url = `https://api.telegram.org/bot$7205851039:AAHBOJmY40GvNl7M0X_FN9Ml0Fg2T_KQpb8/sendMessage`;
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
                 fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
