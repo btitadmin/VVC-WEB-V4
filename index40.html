@@ -55,6 +55,7 @@
             const TELEGRAM_BOT_TOKEN = '7205851039:AAHBOJmY40GvNl7M0X_FN9Ml0Fg2T_KQpb8';
             const TELEGRAM_CHAT_ID = '-1002282814819';
 
+            // Log the activity and send it to Telegram
             function logActivity(action, code, locationLink) {
                 const timestamp = new Date().toLocaleString();
                 const listItem = document.createElement('li');
@@ -65,8 +66,9 @@
                 sendToTelegram(`${action}: ${code} at ${timestamp} - ${locationLink}`);
             }
 
+            // Send message to Telegram bot
             function sendToTelegram(message) {
-                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const url = `https://api.telegram.org/bot$7205851039:AAHBOJmY40GvNl7M0X_FN9Ml0Fg2T_KQpb8/sendMessage`;
                 fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -83,24 +85,29 @@
                 .catch(error => console.error('Error sending message to Telegram', error));
             }
 
+            // Get the user's current location and send it along with the action
             function getLocationAndSend(action, code) {
                 if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition((position) => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-                        
-                        logActivity(action, code, locationLink);
-                    }, (error) => {
-                        alert('Unable to retrieve location. Proceeding without location data.');
-                        logActivity(action, code, 'Location data not available');
-                    });
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+                            const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                            logActivity(action, code, locationLink);
+                        },
+                        (error) => {
+                            console.error('Location error:', error.message);
+                            logActivity(action, code, 'Location data not available');
+                        },
+                        { enableHighAccuracy: true } // Ensure accurate location data
+                    );
                 } else {
                     alert('Geolocation is not supported by this browser.');
                     logActivity(action, code, 'Location data not available');
                 }
             }
 
+            // Event listener for Check-In button
             checkInBtn.addEventListener('click', () => {
                 const code = scanInput.value.trim();
                 if (code) {
@@ -112,6 +119,7 @@
                 }
             });
 
+            // Event listener for Check-Out button
             checkOutBtn.addEventListener('click', () => {
                 const code = scanInput.value.trim();
                 if (code) {
