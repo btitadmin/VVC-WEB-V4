@@ -514,6 +514,21 @@
             color: gray;
             font-style: italic;
         }
+        .box-iframe{
+            background-color: #caff6f; 
+            width: 4.6%; 
+            height: 120px; 
+            position: absolute;
+        }
+        @media (max-width: 768px) {
+            .box-iframe{
+        background-color: #caff6f;
+        height: 120px;
+        position: absolute;
+        width: 16%;
+      }
+            
+        }
     </style>
 </head>
 <body>
@@ -543,7 +558,17 @@
         <a href="#" data-page="1">
          <li class="list-group-item1 ani-1" id="meetingList" data-date="01" data-participants="50" data-section="01">
             <div class="menu-list1">
-              <span class="fs-6"style="color: gold; font-weight: bold; font-family: Kh Muol;">01 - ការប្រជុំប្រចាំខែការិយាល័យកណ្តាល<br><p class="mt-2 txt-date" style="font-family: none; color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ៤កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨ ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី4 ខែធ្នូ ឆ្នាំ2024 ”</p></span>
+              <span class="fs-6"style="color: gold; font-weight: bold; font-family: Kh Muol;">01 - ការប្រជុំប្រចាំខែការិយាល័យកណ្តាល<br><p class="mt-2 txt-date" style="font-family: none; color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ៤កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨ ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី04 ខែធ្នូ ឆ្នាំ2024 ”</p></span>
+              <div class="chevron-right">
+              <i class="bi bi-chevron-right"></i>
+                </div>
+              </div>
+             </li>
+            </a>
+        <a href="#" data-page="2">
+         <li class="list-group-item1 ani-1" id="meetingList" data-date="01" data-participants="50" data-section="02">
+            <div class="menu-list1">
+              <span class="fs-6"style="color: gold; font-weight: bold; font-family: Kh Muol;">02 - ការប្រជុំប្រចាំខែការិយាល័យកណ្តាល<br><p class="mt-2 txt-date" style="font-family: none; color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ថ្ងៃពុធ ១០កើត ខែបុស ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨ ”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“ ត្រូវនឹង ថ្ងៃទី08 ខែមករា ឆ្នាំ2025 ”</p></span>
               <div class="chevron-right">
               <i class="bi bi-chevron-right"></i>
                 </div>
@@ -576,9 +601,24 @@
 </div>
 
 <div id="page-2" class="page">
-    <h1>Page 2</h1>
-    <p>This is the content of Page 2.</p>
-    <button onclick="goBack()">Go Back</button>
+  <div class="container mt-6">
+    <li class="list-group-item1 d-block justify-content-between align-items-center text-center meeting-card" data-date="1" data-participants="50">
+      <div class="text-center">
+        <h6 class="mt-5" style="position: relative; top: 3rem;"><strong></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ថ្ងៃពុធ ១០កើត ខែបុស ឆ្នាំរោង ឆស័ក ព.ស ២៥៦៨<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ត្រូវនឹង ថ្ងៃទី08 ខែមករា ឆ្នាំ2025</h6>
+          <strong class="mt-4" style="position: relative; top: 4rem;">របៀបវារៈប្រជុំ</strong>
+        <div class="mt-6" style="position: relative; top: 2rem;">
+            <img src="https://i.ibb.co/df6DH0q/image.png" style=" width: 60%;"  alt="Meeting Image">
+        </div>
+          <strong class="mt-2">រូបភាពប្រជុំ</strong>
+        <div class="mt-4">
+            <img src="https://i.ibb.co/8sv2GQG/image.png"style=" width: 60%;"  alt="Meeting Image">
+        </div>
+      </div>
+        <strong class="mt-6" style=" top: 3rem;">សំឡេងប្រជុំ</strong>
+        <div class="box-iframe"></div>
+        <iframe src="https://vocaroo.com/embed/1lLio76Md6oT?autoplay=0" style="background: none; border: none; width: 100%; height: 120px; top: 5rem;"></iframe>
+    </li>
+  </div>
 </div>
 
 <div id="page-3" class="page">
